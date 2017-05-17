@@ -1,0 +1,3 @@
+# CUP
+- get advertisement from beacons using noble modules
+- PUT(RESTful API) advertisement to server
