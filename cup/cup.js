@@ -28,48 +28,15 @@ noble.on('stateChange', function (state) {
   }
 })
 
+//scan and send advertisement to the server
 noble.on('discover', function (peripheral) {
   // send PUT request to specific URL
+  advData.serviceUUID = peripheral.id
   advData.rssi = peripheral.rssi
-  advData.distanceV1 = countDistanceV1(peripheral.rssi) 
-  advData.distanceV2 = countDistanceV2(peripheral.rssi) 
+  advData.serviceData = peripheral.advertisement.serviceData
   request(options, callback)
 
-  console.log('sent = ' + JSON.stringify(advData))
-
-  // print out advertisement
-  console.log('Scanned a beacons advertisement:')
-  console.log('\tRSSI = ' + peripheral.rssi)
-  console.log('\tDistances ver1 = ' + countDistanceV1(peripheral.rssi) + ' meter')
-  console.log('\tDistances ver2 = ' + countDistanceV2(peripheral.rssi) + ' meter')
-  // console.log(peripheral.advertisement.serviceData)
-
-/*
-  console.log('peripheral discovered (' + peripheral.id +
-              ' with address <' + peripheral.address +  ', ' + peripheral.addressType + '>,' +
-              ' connectable ' + peripheral.connectable + ',' +
-              ' RSSI ' + peripheral.rssi + ':');
-  console.log('\thello my local name is:');
-  console.log('\t\t' + peripheral.advertisement.localName);
-  console.log('\tcan I interest you in any of the following advertised services:');
-  console.log('\t\t' + JSON.stringify(peripheral.advertisement.serviceUuids));
-
-  var serviceData = peripheral.advertisement.serviceData;
-  if (serviceData && serviceData.length) {
-    console.log('\there is my service data:');
-    for (var i in serviceData) {
-      console.log('\t\t' + JSON.stringify(serviceData[i].uuid) + ': ' + JSON.stringify(serviceData[i].data.toString('hex')));
-    }
-  }
-  if (peripheral.advertisement.manufacturerData) {
-    console.log('\there is my manufacturer data:');
-    console.log('\t\t' + JSON.stringify(peripheral.advertisement.manufacturerData.toString('hex')));
-  }
-  if (peripheral.advertisement.txPowerLevel !== undefined) {
-    console.log('\tmy TX power level is:');
-    console.log('\t\t' + peripheral.advertisement.txPowerLevel);
-  }
-*/
+  console.log('Scanned and sending :\n\t ' + JSON.stringify(advData))
   console.log()
 })
 

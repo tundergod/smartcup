@@ -5,9 +5,13 @@
 
 var http = require('http')
 var express = require('express')
+var calcDistance = require('./calcDistance')
 
 // create an express app
 var app = express()
+
+// view engine setup
+app.use(express.static(__dirname + '/webApplication'))
 
 // create a server
 var server = http.createServer(app)
@@ -18,14 +22,20 @@ app.use('/', function (request, response, next) {
   next()
 })
 
-app.put('/', function (request, response, next) {
-  var cupData = request.body
-  var cupID = request.params.id
-  console.log('Request type : PUT')
-  console.log(cupData)
-  console.log(cupID)
+app.get('/', function(request, response, next){
+	response.sendfile('/index.html')
+	next()
 })
 
+//handle PUT request from each cup
+app.put('/', function (request, response, next) {
+  var cupData = request.body
+//  var cupID = request.params.id
+  console.log('Request type : PUT')
+  console.log(cupData)
+})
+
+//listening to specific IP addr and port
 server.listen(3000, '127.0.0.1', function () {
   console.log('Server Start!')
   console.log('Listening port 3000......')

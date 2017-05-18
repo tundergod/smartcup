@@ -1,5 +1,5 @@
 {
+	"serviceUUID":"",
     "rssi" : "",
-    "distanceV1": "",
-    "distanceV2": ""
+	"serviceData":""
 }
