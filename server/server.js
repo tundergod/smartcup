@@ -9,14 +9,24 @@ var express = require('express')
 // create an express app
 var app = express()
 
-//create a server
+// create a server
 var server = http.createServer(app)
 
-app.get('/', function(request, response){
-	response.end('fuck you')
+app.use('/', function (request, response, next) {
+  var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress
+  console.log('Receive a request from ' + ip)
+  next()
 })
 
-server.listen(3000,'127.0.0.1', function(){
-	console.log('Server Start!');
-	console.log('Listening port 3000......')
+app.put('/', function (request, response, next) {
+  var cupData = request.body
+  var cupID = request.params.id
+  console.log('Request type : PUT')
+  console.log(cupData)
+  console.log(cupID)
+})
+
+server.listen(3000, '127.0.0.1', function () {
+  console.log('Server Start!')
+  console.log('Listening port 3000......')
 })
