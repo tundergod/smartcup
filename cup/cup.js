@@ -7,7 +7,7 @@
 var noble = require('noble')
 var request = require('request')
 
-var advData
+var advData = require('./data.json')
 var method = 'PUT'
 var url = 'http://127.0.0.1:3000'
 var isDuplicate = true
@@ -30,7 +30,12 @@ noble.on('stateChange', function (state) {
 
 noble.on('discover', function (peripheral) {
   // send PUT request to specific URL
+  advData.rssi = peripheral.rssi
+  advData.distanceV1 = countDistanceV1(peripheral.rssi) 
+  advData.distanceV2 = countDistanceV2(peripheral.rssi) 
   request(options, callback)
+
+  console.log('sent = ' + JSON.stringify(advData))
 
   // print out advertisement
   console.log('Scanned a beacons advertisement:')
