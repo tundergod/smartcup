@@ -1,0 +1,24 @@
+{
+	"cup" : [
+		{
+			"cupID" : "",
+			"beacon" : [
+				{
+					"beaconUUID":"",
+					"distance" : ""
+				},
+			
+				{
+					"beaconUUID":"",
+                    "distance" : ""
+				},
+			
+				{
+					"beaconUUID":"",
+                    "distance" : ""
+				}
+			]
+		}
+
+	]
+}

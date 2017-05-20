@@ -9,7 +9,7 @@ var request = require('request')
 
 var advData = require('./data.json')
 var method = 'PUT'
-var url = 'http://127.0.0.1:3000'
+var url = 'http://192.168.2.11:3000'
 var isDuplicate = true
 var options = {
   headers: {'Connection': 'close'},

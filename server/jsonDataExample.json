@@ -1,0 +1,65 @@
+{
+	"cup" : [
+        {
+            "cupID" : "cup001",
+            "beacon" : [
+                {
+                    "serviceUUID":"c1b7cba27177",
+                    "distance" : "0.06765531658762373"
+                },
+
+                {
+                    "serviceUUID":"c2162e97e554",
+                    "distance" : "0.14125375446227545"
+                },
+
+                {
+                    "serviceUUID":"c980f24393bc",
+                    "distance" : "0.48688126422576966"
+                }
+            ]
+        },
+
+		{
+            "cupID" : "cup002",
+            "beacon" : [
+                {
+                    "serviceUUID":"c1b7cba27177",
+                    "distance" : "0.7544933838994431"
+                },
+
+                {
+                    "serviceUUID":"c2162e97e554",
+                    "distance" : "0.09669935836937649"
+                },
+
+                {
+                    "serviceUUID":"c980f24393bc",
+                    "distance" : "0.2630755761638284"
+                }
+            ]
+        },
+
+		{
+            "cupID" : "cup003",
+            "beacon" : [
+                {
+                    "serviceUUID":"c1b7cba27177",
+                    "distance" : "0.2630755761638284"
+                },
+
+                {
+                    "serviceUUID":"c2162e97e554",
+                    "distance" : "0.7544933838994431"
+                },
+
+                {
+                    "serviceUUID":"c980f24393bc",
+                    "distance" : "0.09669935836937649"
+                }
+            ]
+        }
+
+    ]
+}
+

@@ -3,10 +3,16 @@
 2. GET data and calculate the location from each cup
 */
 
+// module used
 var http = require('http')
 var express = require('express')
-var calcDistance = require('./calcDistance')
 var bodyParser = require('body-parser')
+
+// file export
+var calcDistance = require('./calcDistance')
+var dataAnalysis = require('./dataAnalysis')
+var kmean = require('./kmean')
+
 // create an express app
 var app = express()
 
@@ -32,16 +38,20 @@ app.get('/', function (request, response, next) {
 app.put('/', function (request, response, next) {
   var cupData = request.body
 //  var cupID = request.params.id
-  console.log('Request type : PUT')
   console.log(JSON.stringify(cupData))
- // console.log(cupID)
-  console.log('Distance V1= ' + calcDistance.countDistanceV1(cupData.rssi))
-  console.log('Distance V2= ' + calcDistance.countDistanceV1(cupData.rssi))
+  console.log('Request type : PUT')
+  console.log('Service UUID = ' + cupData.serviceUUID)
+  console.log('RSSI = ' + cupData.rssi)
+  console.log('Distance V1 = ' + calcDistance.countDistanceV1(cupData.rssi) + ' meter')
+  console.log('Distance V2 = ' + calcDistance.countDistanceV2(cupData.rssi) + ' meter')
+
+  dataAnalysis.dataAnalysis(cupData)
+
   console.log()
 })
 
 // listening to specific IP addr and port
-server.listen(3000, '127.0.0.1', function () {
+server.listen(3000, '0.0.0.0', function () {
   console.log('Server Start!')
   console.log('Listening port 3000......')
 })
