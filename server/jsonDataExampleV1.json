@@ -2,6 +2,7 @@
 	"cup" : [
         {
             "cupID" : "cup001",
+			"closest" : "",
             "beacon" : [
                 {
                     "serviceUUID":"c1b7cba27177",
@@ -22,6 +23,7 @@
 
 		{
             "cupID" : "cup002",
+			"closest" : "",
             "beacon" : [
                 {
                     "serviceUUID":"c1b7cba27177",
@@ -30,7 +32,7 @@
 
                 {
                     "serviceUUID":"c2162e97e554",
-                    "distance" : "0.09669935836937649"
+                    "distance" : "0.99669935836937649"
                 },
 
                 {
@@ -42,6 +44,7 @@
 
 		{
             "cupID" : "cup003",
+			"closest" : "",
             "beacon" : [
                 {
                     "serviceUUID":"c1b7cba27177",

@@ -11,7 +11,7 @@ var bodyParser = require('body-parser')
 // file export
 var calcDistance = require('./calcDistance')
 var dataAnalysis = require('./dataAnalysis')
-var kmean = require('./kmean')
+var clustering = require('./clustering')
 
 // create an express app
 var app = express()
