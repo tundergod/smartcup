@@ -12,6 +12,7 @@ var bodyParser = require('body-parser')
 var calcDistance = require('./calcDistance')
 var dataAnalysis = require('./dataAnalysis')
 var clustering = require('./clustering')
+var store = require('./storeData')
 
 // create an express app
 var app = express()
@@ -25,6 +26,7 @@ var server = http.createServer(app)
 
 app.use('/', function (request, response, next) {
   var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress
+  console.log('\n\n\n**************************************************************')
   console.log('Receive a request from ' + ip)
   next()
 })
@@ -37,15 +39,26 @@ app.get('/', function (request, response, next) {
 // handle PUT request from each cup
 app.put('/', function (request, response, next) {
   var cupData = request.body
+  var distance
 //  var cupID = request.params.id
   console.log(JSON.stringify(cupData))
   console.log('Request type : PUT')
   console.log('Service UUID = ' + cupData.serviceUUID)
   console.log('RSSI = ' + cupData.rssi)
-  console.log('Distance V1 = ' + calcDistance.countDistanceV1(cupData.rssi) + ' meter')
-  console.log('Distance V2 = ' + calcDistance.countDistanceV2(cupData.rssi) + ' meter')
 
-  dataAnalysis.dataAnalysis(cupData)
+  // distance = calcDistance.countDistanceV1(cupData.rssi)
+  // console.log('Distance V1 = ' + distance + ' meter')
+
+  distance = calcDistance.countDistanceV2(cupData.rssi)
+  console.log('Distance V2 = ' + distance + ' meter')
+
+  // store data in
+  store.storeData(cupData, distance)
+
+  // clustering
+  clustering.clustering()
+
+//  dataAnalysis.dataAnalysis(cupData)
 
   console.log()
 })

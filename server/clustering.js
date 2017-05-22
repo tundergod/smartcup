@@ -10,26 +10,31 @@ TODO:
 */
 
 // var boundaryTable = 3 // set table boundary as 3 m from the center
-var data = require('./jsonDataExampleV1.json')
+//var data = require('./data.json')
+var fs = require('fs')
 var maxDis
 var temp
 
 // using jsonDataExampleV1.json
 function clustering () {
-  for (var i in data.cup) {
-    maxDis = 666
-
-    for (var j in data.cup[i].beacon) {
-      if (data.cup[i].beacon[j].distance < maxDis) {
-        maxDis = data.cup[i].beacon[j].distance
-        temp = j
-      }
+  fs.readFile('data.json', 'utf-8', function (err, data) {
+    if (err) {
+      throw err
     }
 
-    console.log('The cup (cupID : ' + data.cup[i].cupID + ') belongs to table (beaconUUID :' + data.cup[i].beacon[temp].serviceUUID + '), distance : ' + data.cup[i].beacon[temp].distance)
-  }
-}
+    for (var i in data.cup) {
+      maxDis = 666
 
-clustering()
+      for (var j in data.cup[i].beacon) {
+        if (data.cup[i].beacon[j].distance < maxDis) {
+          maxDis = data.cup[i].beacon[j].distance
+          temp = j
+        }
+      }
+
+      console.log('The cup (cupID : ' + data.cup[i].cupID + ') belongs to table (beaconUUID :' + data.cup[i].beacon[temp].beaconUUID + '), distance : ' + data.cup[i].beacon[temp].distance)
+      }
+   })
+}
 
 exports.clustering = clustering

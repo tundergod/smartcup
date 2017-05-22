@@ -1,5 +1,6 @@
 {
 	"serviceUUID":"",
     "rssi" : "",
-	"serviceData":""
+	"serviceData":"",
+	"cupID":""
 }

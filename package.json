@@ -19,6 +19,7 @@
   "devDependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.2",
+    "fs": "0.0.1-security",
     "noble": "^1.8.1",
     "request": "^2.81.0"
   }

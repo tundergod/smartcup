@@ -18,6 +18,7 @@ var options = {
   json: true,
   body: advData
 }
+var cupID = 'cup001'
 
 // fe9a is the service uuid of estimote proximity beacon
 noble.on('stateChange', function (state) {
@@ -28,12 +29,13 @@ noble.on('stateChange', function (state) {
   }
 })
 
-//scan and send advertisement to the server
+// scan and send advertisement to the server
 noble.on('discover', function (peripheral) {
   // send PUT request to specific URL
   advData.serviceUUID = peripheral.id
   advData.rssi = peripheral.rssi
   advData.serviceData = peripheral.advertisement.serviceData
+  advData.cupID = cupID
   request(options, callback)
 
   console.log('Scanned and sending :\n\t ' + JSON.stringify(advData))
@@ -46,32 +48,4 @@ function callback (error, response, data) {
   if (!error && response.statusCode === (200 || 202)) {
     console.log('Info :\n', data)
   }
-}
-
-// method 1
-function countDistanceV1 (rs) {
-  var txpower = -72.0
-
-  if (rs === 0) {
-    return -1.0
-  }
-
-  var ratio = rs * 1.0 / txpower
-  if (ratio < 1.0) {
-    return Math.pow(ratio, 10)
-  } else {
-    var d = (0.89976) * Math.pow(ratio, 7.7095) + 0.111
-    return d
-  }
-}
-
-// method 2
-function countDistanceV2 (rs) {
-  var txpower = -72.0
-  var n = 2 // Environmental attenuation factor(2 -> in free space)
-  if (rs === 0) {
-    return -1.0
-  }
-
-  return Math.pow(10, (txpower - rs) / (10 * n))
 }
