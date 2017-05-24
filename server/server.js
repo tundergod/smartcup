@@ -14,6 +14,7 @@ var dataAnalysis = require('./dataAnalysis')
 var clustering = require('./clustering')
 var store = require('./storeData')
 
+
 // create an express app
 var app = express()
 
@@ -46,15 +47,18 @@ app.put('/', function (request, response, next) {
   console.log('Service UUID = ' + cupData.serviceUUID)
   console.log('RSSI = ' + cupData.rssi)
 
-  // distance = calcDistance.countDistanceV1(cupData.rssi)
-  // console.log('Distance V1 = ' + distance + ' meter')
+  distance = calcDistance.countDistanceV1(cupData.rssi)
+  console.log('Distance V1 = ' + distance + ' meter')
 
   distance = calcDistance.countDistanceV2(cupData.rssi)
   console.log('Distance V2 = ' + distance + ' meter')
 
-  // store data in
-  store.storeData(cupData, distance)
+//  var dataJSON = require('./data.json')
 
+  // store data in
+  //console.log('before update:\n' + JSON.stringify(dataJSON))
+  store.storeData(cupData, distance)
+  //console.log('update data:\n' + JSON.stringify(dataJSON))
   // clustering
   clustering.clustering()
 

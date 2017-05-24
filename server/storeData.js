@@ -6,18 +6,16 @@ handle, store, add and manage data.json when receiving a PUT request
 */
 
 var fs = require('fs')
+//read json file
 
-var pushCup
+var pushCup // a flag that 
 var pushBeacon
 var temp = 0
 
 function storeData (dataIn, distance) {
+  var dataJSON = fs.readFileSync('data.json', 'utf8')
   pushCup = 1
   pushBeacon = 1
-  fs.readFile('data.json', 'utf-8', function (err, dataJSON) {
-    if (err) {
-      throw err
-    }
 
     var dataJ = JSON.parse(dataJSON)
 
@@ -48,8 +46,7 @@ function storeData (dataIn, distance) {
       dataJ.cup[temp].beacon.push({beaconUUID: dataIn.serviceUUID, distance: distance})
     }
 
-    fs.writeFile('data.json', JSON.stringify(dataJ))
-  })
+    fs.writeFileSync('data.json', JSON.stringify(dataJ))
 }
 
 exports.storeData = storeData

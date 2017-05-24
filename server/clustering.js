@@ -12,15 +12,15 @@ TODO:
 // var boundaryTable = 3 // set table boundary as 3 m from the center
 //var data = require('./data.json')
 var fs = require('fs')
+//read file 
+
 var maxDis
 var temp
 
 // using jsonDataExampleV1.json
 function clustering () {
-  fs.readFile('data.json', 'utf-8', function (err, data) {
-    if (err) {
-      throw err
-    }
+	var dataJSON = fs.readFileSync('data.json', 'utf-8')
+	var data = JSON.parse(dataJSON)
 
     for (var i in data.cup) {
       maxDis = 666
@@ -34,7 +34,6 @@ function clustering () {
 
       console.log('The cup (cupID : ' + data.cup[i].cupID + ') belongs to table (beaconUUID :' + data.cup[i].beacon[temp].beaconUUID + '), distance : ' + data.cup[i].beacon[temp].distance)
       }
-   })
 }
 
 exports.clustering = clustering
