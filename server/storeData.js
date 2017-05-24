@@ -46,7 +46,7 @@ function storeData (dataIn, distance) {
       dataJ.cup[temp].beacon.push({beaconUUID: dataIn.serviceUUID, distance: distance})
     }
 
-    fs.writeFileSync('data.json', JSON.stringify(dataJ))
+    fs.writeFileSync('data.json', JSON.stringify(dataJ, null, '\t'))
 }
 
 exports.storeData = storeData
