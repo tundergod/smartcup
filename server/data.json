@@ -5,15 +5,36 @@
 			"beacon": [
 				{
 					"beaconUUID": "c1b7cba27177",
-					"distance": 0.7079457843841379
+					"distance": 1.8138268799403447
 				},
 				{
 					"beaconUUID": "c980f24393bc",
-					"distance": 1.5848931924611136
+					"distance": 5.201644688277087
 				},
 				{
 					"beaconUUID": "c2162e97e554",
-					"distance": 1.1220184543019633
+					"distance": 3.33055118785325
+				},
+				{
+					"beaconUUID": "c303690607af",
+					"distance": 2.721193816594935
+				},
+				{
+					"beaconUUID": "f827312baec5",
+					"distance": 6.807792007496737
+				},
+				{
+					"beaconUUID": "d4c3411de86a",
+					"distance": 2.44618147046074
+				}
+			]
+		},
+		{
+			"cupID": "cup002",
+			"beacon": [
+				{
+					"beaconUUID": "c1b7cba27177",
+					"distance": 10000
 				}
 			]
 		}

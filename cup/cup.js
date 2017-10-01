@@ -9,7 +9,7 @@ var request = require('request')
 
 var advData = require('./data.json')
 var method = 'PUT'
-var url = 'http://192.168.2.11:3000'
+var url = 'http://localhost:3000'
 var isDuplicate = true
 var options = {
   headers: {'Connection': 'close'},
@@ -18,7 +18,7 @@ var options = {
   json: true,
   body: advData
 }
-var cupID = 'cup001'
+var cupID = 'cup002'
 
 // fe9a is the service uuid of estimote proximity beacon
 noble.on('stateChange', function (state) {

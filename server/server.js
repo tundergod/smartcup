@@ -25,50 +25,63 @@ app.use(bodyParser())
 // create a server
 var server = http.createServer(app)
 
-app.use('/', function (request, response, next) {
-  var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress
-  console.log('\n\n\n**************************************************************')
-  console.log('Receive a request from ' + ip)
-  next()
+app.use('/', function(request, response, next) {
+    var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress
+    console.log('\n\n\n**************************************************************')
+    console.log('Receive a request from ' + ip)
+    next()
 })
 
-app.get('/', function (request, response, next) {
-  response.sendfile('/index.html')
-  next()
+app.get('/', function(request, response, next) {
+    response.sendfile('/index.html')
+    next()
 })
 
+var prev1 = 0
+var prev2 = 0
+var first = 1
 // handle PUT request from each cup
-app.put('/', function (request, response, next) {
-  var cupData = request.body
-  var distance
-//  var cupID = request.params.id
-  console.log(JSON.stringify(cupData))
-  console.log('Request type : PUT')
-  console.log('Service UUID = ' + cupData.serviceUUID)
-  console.log('RSSI = ' + cupData.rssi)
+app.put('/', function(request, response, next) {
+    var cupData = request.body
+    var distanceV1 = 0
+    var distanceV2 = 0
 
-  distance = calcDistance.countDistanceV1(cupData.rssi)
-  console.log('Distance V1 = ' + distance + ' meter')
+	// Data output
+    /*
+	console.log(JSON.stringify(cupData))
+    console.log('Request type : PUT')
+    console.log('Service UUID = ' + cupData.serviceUUID)
+    console.log('RSSI = ' + cupData.rssi) 
+	*/
 
-  distance = calcDistance.countDistanceV2(cupData.rssi)
-  console.log('Distance V2 = ' + distance + ' meter')
+    distanceV1 = calcDistance.countDistanceV1(cupData.rssi, prev1, first)
+    console.log('Distance V1 = ' + distanceV1 + ' meter')
+    prev1 = distanceV1
 
-//  var dataJSON = require('./data.json')
+    console.log()
 
-  // store data in
-  //console.log('before update:\n' + JSON.stringify(dataJSON))
-  store.storeData(cupData, distance)
-  //console.log('update data:\n' + JSON.stringify(dataJSON))
-  // clustering
-  clustering.clustering()
+    distanceV2 = calcDistance.countDistanceV2(cupData.rssi, prev2, first)
+    console.log('Distance V4 = ' + distanceV4 + ' meter')
+    prev2 = distanceV2
 
-//  dataAnalysis.dataAnalysis(cupData)
+    console.log()
 
-  console.log()
+	var distance = distanceV1*0.5 + distanceV2*0.5 
+	console.log('Distance = ' + distance)
+
+    first = 0
+
+    // store data in
+    store.storeData(cupData, distance)
+
+    // clustering
+    clustering.clustering()
+
+    console.log()
 })
 
 // listening to specific IP addr and port
-server.listen(3000, '0.0.0.0', function () {
-  console.log('Server Start!')
-  console.log('Listening port 3000......')
+server.listen(3000, '0.0.0.0', function() {
+    console.log('Server Start!')
+    console.log('Listening port 3000......')
 })
